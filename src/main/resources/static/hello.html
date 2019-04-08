@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue初始训练</title>
+    <script src="./js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{message}}</p>
+    </div>
+    <div id="det">
+        <h1>site:{{site}}</h1>
+        <h1>url:{{url}}</h1>
+        <h1>{{details()}}</h1>
+    </div>
+    <div id="vue_det">
+        <h1>site:{{site}}</h1>
+        <h1>url:{{url}}</h1>
+        <h1>{{details()}}</h1>
+    </div>
+    <script>
+        var app= new Vue({
+            el:'#app',
+            data:{
+                message:'Hello ,Vue.js!'
+            }
+        });
+        var det=new Vue({
+            el: '#det',
+            data:{
+                site: "菜鸟教程",
+                url: "www.runoob.com",
+                alexa: "10000"
+            },
+            methods: {
+                details: function () {
+                    return this.site+" - 学的不仅是技术，更是梦想！";
+                }
+            }
+        });
+        var data ={site:"菜鸟教程",url:"www.runoob.com",alexa:10000};
+        var vm=new Vue({
+            el:"#vue_det",
+            data:data
+        });
+        document.write("vm的site与data的site一样吗？"+(vm.site === data.site)+"<br>");
+        vm.site="Runoob";
+        document.write(data.site+"<br>");
+        data.alexa=1234;
+        document.write(vm.alexa+"<br>");
+        document.write("vm的data跟data的json完全一致吗？"+(vm.$data === data)+"<br>");
+        document.write("id完全一致吗？"+((vm.$el === document.getElementById("vue_det")))+"<br>");
+    </script>
+</body>
+</html>

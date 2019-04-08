@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue组件训练</title>
+    <script src="js/vue.nomal.js"></script>
+</head>
+<body>
+    <div id="runoob">
+        <runoob></runoob>
+        <run></run>
+        <child message="Hello!"></child>
+    </div>
+    <div id="app">
+        <run></run>
+        <child message="Hello!"></child>
+    </div>
+    <script>
+        Vue.component('runoob',{
+           template: '<h1>自定义组件！</h1>'
+        });
+        Vue.component('child',{
+            props: ['message'],
+            template: '<span>{{ message }}</span>'
+        });
+        var v_runoob = new Vue({
+           el: '#runoob'
+        });
+        var Child = {
+            template: '<h2>只能在父模板中使用的组件！</h2>'
+        };
+        var v_app = new Vue({
+            el: '#app',
+            components: {
+                'run': Child
+            }
+        });
+        var v_
+    </script>
+</body>
+</html>

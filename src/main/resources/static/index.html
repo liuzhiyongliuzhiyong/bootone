@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue模板语法训练</title>
+    <script src="./js/vue.nomal.js"></script>
+</head>
+<style>
+    .class1{
+        background: #444;
+        color: #eee;
+    }
+</style>
+<body>
+    <div id="app">
+        <div v-html="message"></div>
+        <label for="r1">修改颜色</label>
+        <input type="checkbox" v-model="use" id="r1"/><br>
+        <div v-bind:class="{'class1':use}">
+            v-bind:class 指令
+        </div>
+    </div>
+    <div id="express">
+        <h3>5+5={{ 5+5 }}</h3>
+        <h3>ok?{{ ok ? 'YES' : 'NO'}}</h3>
+        <h3>message反转:{{ message.split('').reverse().join('') }}</h3>
+        <div v-bind:id="'list-' + id">菜鸟教程</div>
+    </div>
+    <div id="ifpd">
+        <p v-if="seen">现在你可以看到我了</p>
+    </div>
+    <div id="url">
+        <pre><a v-bind:href="url">国家税务总局</a></pre>
+    </div>
+    <div>
+        <a v-on:click="doSomething">doSomething</a>
+        <form v-on:submit.prevent="onSubmit"></form>
+    </div>
+    <div id="input">
+        <p>{{message}}</p>
+        <input v-model="message"/>
+    </div>
+    <div id="funs">
+        <p>{{message}}</p>
+        <button v-on:click="reverseMsg">反转函数</button>
+    </div>
+    <div id="filters">
+        {{message | capitalize}}
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: '<h1>菜鸟教程</h1>',
+                use:true
+            }
+        });
+        var express =new Vue({
+            el: '#express',
+            data: {
+                ok: true,
+                message: 'Runner',
+                id: 1
+            }
+        });
+        var ifpd = new Vue({
+            el: '#ifpd',
+            data: {
+                seen: false
+            }
+        });
+        var url = new Vue({
+            el: '#url',
+            data: {
+                url: 'http://www.chinatax.gov.cn/n810341/n810760/index.html'
+            }
+        });
+        var input = new Vue({
+            el: '#input',
+            data: {
+                message: 'Hello'
+            }
+        });
+        var funs = new Vue({
+            el: '#funs',
+            data: {
+                message: 'Hello Vue!'
+            },
+            methods: {
+                reverseMsg: function () {
+                    this.message = this.message.split('').reverse().join('')
+                }
+            }
+        });
+        var filters =new Vue({
+            el: '#filters',
+            data: {
+                message: 'hello vue!'
+            },
+            filters: {
+                capitalize: function (value) {
+                    if (!value) return '';
+                    value = value.toString();
+                    return value.charAt(0).toUpperCase() + value.slice(1);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

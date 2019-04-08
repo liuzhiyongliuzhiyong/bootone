@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue事件处理器</title>
+    <script src="js/vue.nomal.js"></script>
+</head>
+<body>
+    <div id="greet">
+        <button v-on:click="greet">点我呗</button>
+    </div>
+    <script>
+        var v_greet = new Vue({
+           el: '#greet',
+           data: {
+               name: 'Vue.js'
+           },
+            methods: {
+               greet: function (event) {
+                   alert('Hello '+this.name);
+                   if (event) {
+                       alert(event.target.tagName)
+                   }
+               }
+            }
+        });
+        v_greet.greet();
+    </script>
+</body>
+</html>

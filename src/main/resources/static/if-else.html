@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue条件判断语句</title>
+    <script src="./js/vue.nomal.js"></script>
+</head>
+<body>
+    <div id="ifel">
+        <p v-if="seen">现在你可以看到我了</p>
+        <template v-if="ok">
+            <h1>又看见我了</h1>
+        </template>
+    </div>
+    <div id="fors">
+        <ol>
+            <li v-for="site in sites">
+                {{site.name}}
+            </li>
+        </ol>
+    </div>
+    <div id="app">
+        <p style="font-size:25px;">计数器：{{ counter}}</p>
+        <button @click="counter++" style="font-size:25px;">点我</button>
+    </div>
+    <script>
+        var ifel = new Vue({
+            el: '#ifel',
+            data: {
+                seen: true,
+                ok: true
+            }
+        });
+        var fors =new Vue({
+            el: '#fors',
+            data: {
+                sites:[
+                    { name : '张三'},
+                    { name : '李四'},
+                    { name : '王五'},
+                    { name : '梦刘'},
+                    { name : '朝气'},
+                ]
+            }
+        });
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                counter:1
+            }
+        });
+        vm.$watch('counter',function (nval,oval) {
+            alert('计数值的变化：'+ oval + '变为' + nval);
+        });
+    </script>
+</body>
+</html>

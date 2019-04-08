@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue样式设置</title>
+    <script src="./js/vue.nomal.js"></script>
+    <style>
+        .base {
+            width: 100px;
+            height: 100px;
+        }
+        .active {
+            width: 100px;
+            height: 100px;
+            background: aqua;
+        }
+        .text-danger {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <!--<div id="app">-->
+        <!--<div @class="{active:isActive}"></div>-->
+    <!--</div>-->
+    <!--<div id="classObj">-->
+        <!--<div @class="classObj"></div>-->
+    <!--</div>-->
+    <div id="errCla">
+        <div :class="[activeClass, errorClass]"></div>
+    </div>
+    <script>
+        // var vm = new Vue({
+        //     el: '#app',
+        //     data: {
+        //         isActive: true
+        //     }
+        // });
+        // var v_classObj = new Vue({
+        //    el: '#classObj',
+        //    data: {
+        //         isActive: true,
+        //         error: {
+        //             value: true,
+        //             type: 'fatal'
+        //         }
+        //    },
+        //     computed: {
+        //         classObj: function () {
+        //             return {
+        //                 base: true,
+        //                 active: this.isActive && ! this.error.value,
+        //                 'text-danger':this.error.value && this.error.type == 'fatal'
+        //             }
+        //         }
+        //     }
+        // });
+        var errClass = new Vue({
+           el: '#errCla',
+           data: {
+             activeClass: 'active',
+             errorClass: 'text-danger'
+           }
+        });
+    </script>
+</body>
+</html>

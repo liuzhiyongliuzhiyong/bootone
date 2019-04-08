@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue监听属性</title>
+    <script src="./js/vue.nomal.js"></script>
+</head>
+<body>
+    <div id="vm">
+        千米： <input type="text" v-model="kilo"/>
+        米：<input type="text" v-model="meter"/>
+    </div>
+    <p id="info"></p>
+    <script>
+        var vm = new Vue({
+           el: '#vm',
+           data: {
+                kilo:0,
+                meter:0
+           } ,
+           methods: {
+
+           },
+           computed: {
+
+           },
+            watch: {
+                kilo:function (val) {
+                    this.kilo=val;
+                    this.meter=this.kilo *1000;
+                },
+                meter:function (val) {
+                    this.kilo=val/1000;
+                    this.meter=val;
+                }
+            }
+        });
+        vm.$watch('kilo',function (nval,oval) {
+            document.getElementById("info").innerHTML = "修改前值为: " + nval + "，修改后值为: " + oval;;
+        });
+    </script>
+</body>
+</html>
