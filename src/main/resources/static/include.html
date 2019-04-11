@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue自定义指令学习</title>
+    <script src="./js/vue.nomal.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>自动获取焦点</p>
+        <input v-focus/>
+    </div>
+    <div id="directives">
+        <p>局部自定义指令，自动获取焦点</p>
+        <input v-focus1>
+    </div>
+    <div id="gouzi" v-runoob:hello.a.b="message"></div>
+    <div id="run">
+        <button v-runtest="{ color: 'green', text: '菜鸟教程！'}"></button>
+    </div>
+    <script>
+        Vue.directive('focus',{
+            inserted: function (el) {
+                el.focus()
+            }
+        });
+        new Vue({ el: '#app'});
+        new Vue({
+            el: '#directives',
+            directives: {
+                focus1: {
+                    inserted: function (el) {
+                        el.focus()
+                    }
+                }
+            }
+        });
+        Vue.directive('runoob', {
+            bind: function (el, binding, vnode) {
+                var s = JSON.stringify;
+                el.innerHTML =
+                    'name: '        + s(binding.name) + '<br>' +
+                    'value: '       + s(binding.value) + '<br>' +
+                    'expression: '  + s(binding.expression) + '<br>' +
+                    'argument: '    + s(binding.arg) + '<br>' +
+                    'modifiers: '   + s(binding.modifiers) + '<br>' +
+                    'vnode keys: '  + Object.keys(vnode).join(', ')
+            }
+        });
+        new Vue({
+            el: '#gouzi',
+            data: {
+                message: "菜鸟教程！"
+            }
+        });
+        Vue.directive('runtest' ,function (el, binding) {
+            el.innerHTML = binding.value.text;
+            el.style.backgroundColor = binding.value.color
+        })
+        new Vue({ el: '#run'})
+    </script>
+</body>
+</html>
