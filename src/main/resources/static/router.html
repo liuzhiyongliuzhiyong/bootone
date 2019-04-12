@@ -5,29 +5,63 @@
     <title>Vue 路由学习</title>
     <script src="./js/vue.nomal.js"></script>
     <script src="./js/vue-router.js"></script>
+    <style>
+        ._active{
+            background-color: red;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
         <h1>Hello App!</h1>
         <p>
-            <router-link to="/foo">GO to Foo</router-link>
-            <router-link to="/bar">GO to Bar</router-link>
+            <router-link to="/foo">GO to Foo</router-link><br>
+            <router-link to="/bar">GO to Bar</router-link><br>
         </p>
         <router-view></router-view>
     </div>
+    <div id="router">
+        <router-link to="home">Home</router-link><br>
+        <a href="home">Home</a><br>
+        <router-link v-bind:to="'home'">Home</router-link><br>
+        <router-link :to="'home'">Home</router-link><br>
+        <router-link :to="{path: 'home'}">Home</router-link><br>
+        <router-link :to="{name: 'user',params:{userId: 123}}">User</router-link><br>
+        <router-link :to="{path: 'register', query: {plan: 'private'}}">Register</router-link><br>
+        <router-link :to="{path: '/abc'}" replace>Replace</router-link><br>
+        <router-link :to="{path: 'relative/path'}" append>append</router-link><br>
+        <router-link to="/foo" tag="li">foo tag</router-link><br>
+        <li>foo tag</li><br>
+    </div>
+    <p>
+        <router-link v-bind:to="{path: '/router1'}" active-class="_active">Router link class</router-link><br>
+        <router-link v-bind:to="{path: '/router2'}" tag="span">Router link span</router-link><br>
+    </p>
     <script>
-        const Foo = { template: '<div>foo</div>'}
-        const Bar = { template: '<div>bar</div>'}
+        const Foo = { template: '<div>foo</div>'};
+        const Bar = { template: '<div>bar</div>'};
         const routes = [
             { path: '/foo', component: Foo},
             { path: '/bar', component: Bar}
         ];
         const router = new VueRouter({
             routes:routes
-        })
-        const app = new Vue({
+        });
+        new Vue({
             router
-        }).$mount("#app")
+        }).$mount("#app");
+        const routers = [
+            { path: 'home'},
+            { path: '\'home\''},
+            { path: 'abc'},
+            { path: 'user'},
+            { path: 'register'},
+            { path: '/foo'},
+            { path: ''},
+        ];
+        new Vue({
+            routers
+        }).$mount("router");
     </script>
 </body>
 </html>
