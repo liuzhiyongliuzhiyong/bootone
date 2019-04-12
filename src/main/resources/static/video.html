@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue过渡与动画</title>
+    <script src="./js/vue.nomal.js"></script>
+    <script src="./js/vue-router.js"></script>
+    <script src="./js/velocity.min.js"></script>
+    <style>
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity 1s;
+        }
+        .fade-enter, .fade-leave-to {
+            opacity: 0;
+        }
+        .slide-fade-enter-active {
+            transition: all .3s ease;
+        }
+        .slide-fade-leave-active {
+            transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        }
+        .slide-fade-enter, .slide-fade-leave-to {
+            transform: translateX(10px);
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="databinding">
+        <button v-on:click="show = !show">点我</button>
+        <transition name="fade">
+            <p v-show="show" v-bind:style="styleobj">动画实例</p>
+        </transition>
+    </div>
+
+    <div id="databind">
+        <button v-on:click="show = !show">点我</button>
+        <transition name="slide-fade">
+            <p v-if="show">菜鸟教程</p>
+        </transition>
+    </div>
+    <div id="databin">
+        <button v-on:click="show = !show">点我</button>
+        <transition name="custom-classes-transition"
+                    enter-active-class="animated tada"
+                    leave-active-class="animated bounceOutRight">
+            <p v-if="show">Helllo Vue</p>
+        </transition>
+    </div>
+    <div id="databind2">
+        <button v-on:click="show = !show">点我</button>
+        <transition v-on:before-enter="beforeEnter"
+                    v-on:enter="enter"
+                    v-on:leave="leave"
+                    v-bind:css="false">
+            <p v-if="show">菜鸟教程-Hello Vue</p>
+        </transition>
+    </div>
+    <script>
+        new Vue({
+            el: '#databinding',
+            data: {
+                show: true,
+                styleobj: {
+                    fontSize: '30px',
+                    color: 'red'
+                }
+            },
+            methods: {
+            }
+        });
+        new Vue({
+            el: '#databind',
+            data: {
+                show: true
+            }
+        });
+        new Vue({
+            el: '#databin',
+            data: {
+                show: true
+            }
+        });
+        new Vue({
+            el: '#databind2',
+            data: {
+                show: false
+            },
+            methods: {
+                beforeEnter: function (el){
+                    el.style.opacity = 0;
+                    el.style.transformOrigin = 'left'
+                },
+                enter: function (el,done) {
+                    Velocity(el, {opacity: 1, fontSize: '1.4em'}, {duration: 300});
+                    Velocity(el, {fontSize: '1em'}, { complete: done})
+                },
+                leave: function (el, done) {
+                    Velocity(el, {translateX: '15px', rotateZ: '50deg'}, {duration: 600});
+                    Velocity(el, {rotateZ: '100deg'}, {loop: 2});
+                    Velocity(el, {
+                        rotateZ: '45deg',
+                        translateY: '30px',
+                        translateX: '30px',
+                        opacity: 0
+                    }, {complete: done})
+                }
+            }
+        })
+    </script>
+</body>
+</html>
