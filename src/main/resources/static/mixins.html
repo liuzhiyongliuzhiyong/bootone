@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue混入学习</title>
+    <script src="./js/vue.nomal.js"></script>
+    <script src="./js/vue-router.js"></script>
+    <script src="./js/velocity.min.js"></script>
+</head>
+<body>
+    <div id="databinding"></div>
+    <script>
+        new Vue({
+            el: '#databinding',
+            data: {
+            },
+            methods: {
+            }
+        });
+        var myMixin = {
+            created: function () {
+                this.startmixin()
+            },
+            methods: {
+                startmixin: function () {
+                    document.write("欢迎来到Vue混入");
+                }
+            }
+        };
+        var Component = Vue.extend({
+            mixins: [myMixin]
+        });
+        var component = new Component();
+        Vue.mixin({
+            created: function () {
+                var myOption = this.$options.myOption
+                if (myOption){
+                    document.write(myOption)
+                }
+            }
+        });
+        new Vue({
+            myOption: 'Hello!'
+        })
+    </script>
+</body>
+</html>
