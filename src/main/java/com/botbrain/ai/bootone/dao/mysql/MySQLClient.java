@@ -18,7 +18,6 @@ import java.util.List;
  * @日期：2019/4/13 11:17
  * @版本：1.0
  **/
-@Component
 public class MySQLClient {
     private static final Logger logger=LoggerFactory.getLogger(MySQLClient.class);
     @Autowired
