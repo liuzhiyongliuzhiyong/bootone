@@ -7,10 +7,7 @@ import com.botbrain.ai.bootone.entity.IPManager;
 import com.botbrain.ai.bootone.util.JavaUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,6 +17,7 @@ import java.util.List;
  * @日期：2019/4/13 15:27
  * @版本：1.0
  **/
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/ip")
 public class IpController {
